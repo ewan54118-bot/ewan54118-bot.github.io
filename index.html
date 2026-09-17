@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">模块六：如何进行网页页面布局</title>
+    <link rel="stylesheet" href="css/module6.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==================== 顶部导航 ==================== -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner">
+            <div class="logo">
+                <i class="fas fa-layer-group"></i>
+                <span>Web<span class="logo-accent">Layout</span> 
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <div class="nav-group-home">
+                    <a href="#" class="nav-link active" onclick="navigateTo('home'); return false;" data-i18n="nav_home">首页</a>
+                    <a href="#" class="nav-link" onclick="navigateTo('flexbox'); return false;">Flexbox</a>
+                    <a href="#" class="nav-link" onclick="navigateTo('grid'); return false;">Grid</a>
+                    <a href="#" class="nav-link" onclick="navigateTo('float'); return false;">Float</a>
+                    <a href="#" class="nav-link" onclick="navigateTo('position'); return false;">Position</a>
+                    <a href="#" class="nav-link" onclick="navigateTo('responsive'); return false;" data-i18n="nav_responsive">响应式</a>
+                </div>
+                <div class="nav-group-sub" id="navGroupSub" style="display:none;">
+                    <button class="sub-nav-btn prev-btn" id="prevChapterBtn" title="上一章节" data-i18n-title="btn_prev_chapter">
+                        <i class="fas fa-chevron-left"></i> <span class="btn-text" data-i18n="btn_prev_chapter">上一章</span>
+                    </button>
+                    <button class="sub-nav-btn back-home-btn" id="backHomeBtn" onclick="navigateTo('home')" title="返回总目录" data-i18n-title="btn_back_home">
+                        <i class="fas fa-th-large"></i> <span class="btn-text" data-i18n="btn_back_home">返回目录</span>
+                    </button>
+                    <button class="sub-nav-btn next-btn" id="nextChapterBtn" title="下一章节" data-i18n-title="btn_next_chapter">
+                        <span class="btn-text" data-i18n="btn_next_chapter">下一章</span> <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </nav>
+            <div class="header-actions">
+                <button class="lang-toggle" id="langToggle" title="Switch Language / 切换语言">
+                    <i class="fas fa-language"></i> <span id="langLabel">EN</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="theme-toggle" id="themeToggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 视图 0：总目录首页 ==================== -->
+    <div id="view-home" class="page-view active">
+        <section class="hero" id="hero">
+            <div class="hero-bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+            <div class="hero-content">
+                <div class="module-badge">
+                    <i class="fas fa-book-open"></i> <span data-i18n="hero_badge">模块六</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-i18n="hero_title_prefix">如何进行</span><span class="gradient-text" data-i18n="hero_title_highlight">网页页面布局</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    从Flexbox到Grid，从浮动到定位，从固定到响应式 —— 全面掌握现代CSS布局核心技术，
+                    通过交互式DOM演示深入理解每一种布局方式的原理与实践。
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label" data-i18n="stat_layout_solutions">核心布局方案</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label" data-i18n="stat_interactive_demos">交互演示</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label" data-i18n="stat_code_snippets">关键代码片段</span>
+                    </div>
+                </div>
+                <a href="#directory" class="cta-button" onclick="document.getElementById('directory').scrollIntoView({behavior:'smooth'}); return false;">
+                    <i class="fas fa-rocket"></i> <span data-i18n="btn_browse_directory">浏览课程目录</span>
+                </a>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span data-i18n="scroll_down">向下滚动</span>
+            </div>
+        </section>
+
+        <section class="directory-section" id="directory">
+            <div class="container">
+                <div class="section-header center">
+                    <h2 class="section-title" data-i18n="dir_title">课程章节目录</h2>
+                    <p class="section-subtitle" data-i18n="dir_subtitle">点击任意卡片，进入对应小节的详细学习与交互演示</p>
+                </div>
+                <div class="directory-grid">
+                    <div class="directory-card" onclick="navigateTo('flexbox')">
+                        <div class="dir-card-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8);"><i class="fas fa-arrows-alt-h"></i></div>
+                        <div class="dir-card-num">01</div>
+                        <h3 data-i18n="dir_flexbox_title">Flexbox 弹性布局</h3>
+                        <p data-i18n="dir_flexbox_desc">一维布局的终极解决方案，轻松实现对齐、分布和排序。</p>
+                        <span class="dir-card-link"><span data-i18n="dir_enter_study">进入学习</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="directory-card" onclick="navigateTo('grid')">
+                        <div class="dir-card-icon" style="background: linear-gradient(135deg, #10b981, #34d399);"><i class="fas fa-th"></i></div>
+                        <div class="dir-card-num">02</div>
+                        <h3 data-i18n="dir_grid_title">Grid 网格布局</h3>
+                        <p data-i18n="dir_grid_desc">二维布局的强大武器，行列同时控制，构建复杂页面结构。</p>
+                        <span class="dir-card-link"><span data-i18n="dir_enter_study">进入学习</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="directory-card" onclick="navigateTo('float')">
+                        <div class="dir-card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"><i class="fas fa-water"></i></div>
+                        <div class="dir-card-num">03</div>
+                        <h3 data-i18n="dir_float_title">Float 浮动布局</h3>
+                        <p data-i18n="dir_float_desc">经典布局方式的基石，理解文档流与清除浮动的核心原理。</p>
+                        <span class="dir-card-link"><span data-i18n="dir_enter_study">进入学习</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="directory-card" onclick="navigateTo('position')">
+                        <div class="dir-card-icon" style="background: linear-gradient(135deg, #ef4444, #f87171);"><i class="fas fa-crosshairs"></i></div>
+                        <div class="dir-card-num">04</div>
+                        <h3 data-i18n="dir_position_title">Position 定位布局</h3>
+                        <p data-i18n="dir_position_desc">精确控制元素位置，实现固定导航、悬浮按钮、遮罩层等效果。</p>
+                        <span class="dir-card-link"><span data-i18n="dir_enter_study">进入学习</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="directory-card" onclick="navigateTo('responsive')">
+                        <div class="dir-card-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="dir-card-num">05</div>
+                        <h3 data-i18n="dir_responsive_title">响应式布局与媒体查询</h3>
+                        <p data-i18n="dir_responsive_desc">一套代码适配所有设备，从手机到桌面完美呈现。</p>
+                        <span class="dir-card-link"><span data-i18n="dir_enter_study">进入学习</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="summary-section" id="summary">
+            <div class="container">
+                <div class="section-header center">
+                    <h2 class="section-title" data-i18n="summary_title">布局方案对比总结</h2>
+                    <p class="section-subtitle" data-i18n="summary_subtitle">选择合适的布局方式，事半功倍</p>
+                </div>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="table_feature">特性</th>
+                                <th><i class="fas fa-arrows-alt-h"></i> Flexbox</th>
+                                <th><i class="fas fa-th"></i> Grid</th>
+                                <th><i class="fas fa-water"></i> Float</th>
+                                <th><i class="fas fa-crosshairs"></i> Position</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-i18n="table_dimension"><strong>维度</strong></td>
+                                <td data-i18n="dim_1d">一维</td>
+                                <td data-i18n="dim_2d">二维</td>
+                                <td data-i18n="dim_1d">一维</td>
+                                <td data-i18n="dim_precise">精确定位</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="table_use_case"><strong>适用场景</strong></td>
+                                <td data-i18n="use_flex">导航栏、按钮组、卡片行</td>
+                                <td data-i18n="use_grid">整体页面、仪表盘</td>
+                                <td data-i18n="use_float">文字环绕、旧项目</td>
+                                <td data-i18n="use_pos">弹窗、固定元素、角标</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="table_difficulty"><strong>学习难度</strong></td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="table_compat"><strong>浏览器兼容</strong></td>
+                                <td data-i18n="compat_flex">优秀 (IE11+)</td>
+                                <td data-i18n="compat_grid">良好 (IE不支持subgrid)</td>
+                                <td data-i18n="compat_float">完美 (所有浏览器)</td>
+                                <td data-i18n="compat_pos">优秀 (sticky需IE13+)</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="table_recommend"><strong>推荐指数</strong></td>
+                                <td><span class="rating">⭐⭐⭐⭐⭐</span></td>
+                                <td><span class="rating">⭐⭐⭐⭐⭐</span></td>
+                                <td><span class="rating">⭐⭐</span></td>
+                                <td><span class="rating">⭐⭐⭐⭐</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="best-practices">
+                    <h3><i class="fas fa-trophy"></i> <span data-i18n="bp_title">最佳实践建议</span></h3>
+                    <div class="practices-grid">
+                        <div class="practice-card">
+                            <div class="practice-icon" style="background:linear-gradient(135deg,#6366f1,#818cf8);"><i class="fas fa-check"></i></div>
+                            <h4 data-i18n="bp_flex_title">组件级布局 → Flexbox</h4>
+                            <p data-i18n="bp_flex_desc">导航栏、工具栏、按钮组、表单行等一维排列的组件</p>
+                        </div>
+                        <div class="practice-card">
+                            <div class="practice-icon" style="background:linear-gradient(135deg,#10b981,#34d399);"><i class="fas fa-check"></i></div>
+                            <h4 data-i18n="bp_grid_title">页面级布局 → Grid</h4>
+                            <p data-i18n="bp_grid_desc">整体页面框架、多区域仪表盘、复杂的卡片网格</p>
+                        </div>
+                        <div class="practice-card">
+                            <div class="practice-icon" style="background:linear-gradient(135deg,#ef4444,#f87171);"><i class="fas fa-check"></i></div>
+                            <h4 data-i18n="bp_pos_title">特殊定位 → Position</h4>
+                            <p data-i18n="bp_pos_desc">固定导航、吸顶标题、模态框、悬浮按钮、角标</p>
+                        </div>
+                        <div class="practice-card">
+                            <div class="practice-icon" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);"><i class="fas fa-check"></i></div>
+                            <h4 data-i18n="bp_resp_title">始终响应式</h4>
+                            <p data-i18n="bp_resp_desc">结合媒体查询，让所有布局在手机端也能完美展示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 视图 1：Flexbox弹性布局 ==================== -->
+    <div id="view-flexbox" class="page-view">
+        <section class="module-section" id="flexbox">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-number">01</div>
+                    <div class="section-title-group">
+                        <h2 class="section-title" data-i18n="sec_flex_title">Flexbox 弹性布局</h2>
+                        <p class="section-subtitle" data-i18n="sec_flex_sub">一维布局的终极解决方案，轻松实现对齐、分布和排序</p>
+                    </div>
+                    <div class="section-icon" style="--accent: #6366f1;"><i class="fas fa-arrows-alt-h"></i></div>
+                </div>
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="concept"><i class="fas fa-lightbulb"></i> <span data-i18n="tab_concept">核心概念</span></button>
+                    <button class="tab-btn" data-tab="case"><i class="fas fa-briefcase"></i> <span data-i18n="tab_case">案例剖析</span></button>
+                    <button class="tab-btn" data-tab="code"><i class="fas fa-code"></i> <span data-i18n="tab_code">代码示例</span></button>
+                    <button class="tab-btn" data-tab="demo"><i class="fas fa-play-circle"></i> <span data-i18n="tab_demo">交互演示</span></button>
+                </div>
+
+                <div class="tab-panel active" data-panel="concept">
+                    <div class="knowledge-card">
+                        <div class="knowledge-header"><i class="fas fa-lightbulb"></i><h3 data-i18n="concept_header">核心概念讲解</h3></div>
+                        <div class="knowledge-body"><div class="knowledge-grid">
+                            <div class="knowledge-item"><h4><i class="fas fa-arrow-right"></i> <span data-i18n="flex_c1_title">什么是 Flexbox？</span></h4><p data-i18n="flex_c1_desc">Flexbox（弹性盒子布局）是CSS3中引入的一种<strong>一维布局模型</strong>。它可以让容器内的子元素在主轴和交叉轴上灵活地排列、对齐和分配空间。只需在父容器上设置 <code>display: flex</code>，即可激活弹性布局。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-arrows-alt"></i> <span data-i18n="flex_c2_title">主轴与交叉轴</span></h4><p data-i18n="flex_c2_desc">Flexbox 布局基于<strong>两个轴线</strong>工作：<br>• <strong>主轴（Main Axis）</strong>：由 <code>flex-direction</code> 决定，默认为水平方向<br>• <strong>交叉轴（Cross Axis）</strong>：垂直于主轴的方向<br>所有对齐属性都围绕这两条轴线运作。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-cogs"></i> <span data-i18n="flex_c3_title">容器属性</span></h4><p data-i18n="flex_c3_desc">• <code>display: flex</code> — 启用弹性布局<br>• <code>flex-direction</code> — 主轴方向（row / column）<br>• <code>justify-content</code> — 主轴对齐方式<br>• <code>align-items</code> — 交叉轴对齐方式<br>• <code>flex-wrap</code> — 是否换行<br>• <code>gap</code> — 子元素间距</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-sliders-h"></i> <span data-i18n="flex_c4_title">子项属性</span></h4><p data-i18n="flex_c4_desc">• <code>flex-grow</code> — 放大比例（默认0）<br>• <code>flex-shrink</code> — 缩小比例（默认1）<br>• <code>flex-basis</code> — 初始大小<br>• <code>align-self</code> — 单独对齐方式<br>• <code>order</code> — 排列顺序</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-sort-amount-down"></i> <span data-i18n="flex_c5_title">order 视觉排序</span></h4><p data-i18n="flex_c5_desc">通过 <code>order</code> 属性可以在<strong>不改变 HTML 结构</strong>的情况下重新排列子元素的视觉顺序。默认值为 0，值越小越靠前，非常适合移动端适配时调整元素展示顺序。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-star"></i> <span data-i18n="flex_c6_title">最佳应用场景</span></h4><p data-i18n="flex_c6_desc">导航栏、按钮组、卡片列表、表单控件行、垂直居中、Sticky Footer 等<strong>单行或单列</strong>的组件级布局场景。它是现代前端开发中最常用的布局方式之一。</p></div>
+                        </div></div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" data-panel="case">
+                    <div class="case-study-card" style="--case-accent: #6366f1;">
+                        <div class="case-header">
+                            <div class="case-icon"><i class="fas fa-rocket"></i></div>
+                            <div>
+                                <h3 data-i18n="case_flex_title">实战案例：现代 SaaS 产品官网顶部导航与 Hero 区</h3>
+                                <p data-i18n="case_flex_sub">剖析 Stripe、Vercel 等顶级 SaaS 官网如何利用 Flexbox 构建极具呼吸感且完美对齐的首屏布局。</p>
+                            </div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-diagram">
+                                <div class="diagram-navbar"><span class="dn-logo">Logo</span><span class="dn-links">Products &nbsp; Solutions &nbsp; Pricing</span><span class="dn-btn">Sign In</span></div>
+                                <div class="diagram-hero"><div class="dh-text"><div class="dh-title">Build faster.</div><div class="dh-sub">The ultimate platform.</div><div class="dh-btn">Get Started →</div></div><div class="dh-img">[ 3D Illustration ]</div></div>
+                            </div>
+                            <h4 class="case-subtitle"><i class="fas fa-search-plus"></i> <span data-i18n="case_analysis_title">布局深度剖析</span></h4>
+                            <div class="knowledge-grid">
+                                <div class="knowledge-item"><h4><i class="fas fa-1"></i> <span data-i18n="case_flex_p1_title">导航栏的三段式分布</span></h4><p data-i18n="case_flex_p1_desc">顶部导航是 Flexbox 最经典的场景。父容器设置 <code>display: flex; justify-content: space-between; align-items: center;</code>。Logo 靠左，菜单链接居中（或靠右），登录按钮靠右。无需计算任何 margin，Flex 自动将剩余空间完美分配。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-2"></i> <span data-i18n="case_flex_p2_title">Hero 区的左右分栏与垂直居中</span></h4><p data-i18n="case_flex_p2_desc">英雄区通常分为左侧文案和右侧插图。父容器设置 <code>display: flex; align-items: center; gap: 48px;</code>。左侧文案区内部的标题、副标题、按钮则使用 <code>flex-direction: column; align-items: flex-start;</code> 实现左对齐的垂直堆叠。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-3"></i> <span data-i18n="case_flex_p3_title">统计数据的等宽分配</span></h4><p data-i18n="case_flex_p3_desc">Hero 区下方的“客户数量、融资额”等统计卡片，父容器设为 Flex 后，子卡片只需设置 <code>flex: 1;</code>，无论屏幕多宽，3个卡片都会永远平分父容器的宽度，且自动处理内部文字的对齐。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-4"></i> <span data-i18n="case_flex_p4_title">移动端降级 (Order 与 Direction)</span></h4><p data-i18n="case_flex_p4_desc">在手机端，Hero 区需要从“左右结构”变为“上下结构”，且插图要在文案下方。只需在媒体查询中将父容器改为 <code>flex-direction: column;</code>，或者保持 row 但给插图设置 <code>order: 2;</code>，即可在不改动 HTML 结构的情况下完成响应式重构。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-5"></i> <span data-i18n="case_flex_p5_title">Flex Shrink 与内容溢出防御</span></h4><p data-i18n="case_flex_p5_desc">当导航链接文字过长时，Flex 子项默认会收缩（shrink）。为防止按钮被挤压变形，需对关键元素设置 <code>flex-shrink: 0;</code>。同时配合 <code>min-width: 0;</code> 解决 Flex 子项内文本溢出省略号失效的经典 Bug。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-6"></i> <span data-i18n="case_flex_p6_title">Gap vs Margin 的性能与整洁度</span></h4><p data-i18n="case_flex_p6_desc">传统布局用 margin 控制间距会导致首尾多余空白或需要负 margin hack。Flex 的 <code>gap</code> 属性直接在容器层面定义间距，不仅代码更简洁，且在动态增删子元素时无需处理边缘 margin，渲染性能也更优。</p></div>
+                            </div>
+
+                            <!-- 🌟 新增：布局架构师思维模型 (理论升华) -->
+                            <div class="layout-theory-box">
+                                <h4 class="theory-title"><i class="fas fa-brain"></i> <span data-i18n="theory_flex_title">🧠 布局架构师思维：从语法到页面设计模式</span></h4>
+                                <p class="theory-desc" data-i18n="theory_flex_desc">做好页面布局的核心不在于记住多少个 CSS 属性，而在于建立“**内容流与弹性空间分配**”的宏观思维。在真实企业级项目中，Flexbox 的本质是解决“**未知尺寸元素在有限空间内的博弈与妥协**”。</p>
+                                <ul class="theory-list">
+                                    <li data-i18n="theory_flex_l1"><strong>设计模式抽象：</strong> 将页面拆解为“刚性节点”（如 Logo、按钮，设置 <code>flex-shrink: 0</code> 绝对不被挤压）与“弹性节点”（如搜索框、文本截断区，设置 <code>flex: 1; min-width: 0</code> 吸收剩余空间并优雅降级）。这是构建健壮 UI 组件库的底层逻辑。</li>
+                                    <li data-i18n="theory_flex_l2"><strong>性能与渲染机制：</strong> Flexbox 布局计算发生在浏览器的 Layout（排版）阶段。过度嵌套的 Flex 容器会导致渲染树深度增加，引发性能瓶颈。架构师原则：**能用单层 Flex + gap 解决的，绝不嵌套 div 增加 DOM 深度**。</li>
+                                    <li data-i18n="theory_flex_l3"><strong>可维护性法则：</strong> 摒弃传统的“百分比宽度 + 负 margin”hack，全面拥抱 <code>gap</code> 与 <code>flex-basis</code>。这不仅让 CSS 代码量减少 40%，更让后续接手项目的开发者能直观理解空间分配意图，降低团队协作成本。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" data-panel="code">
+                    <div class="code-block"><div class="code-header"><div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span class="code-title">flexbox-layout.css</span><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> <span data-i18n="btn_copy">复制代码</span></button></div><pre class="code-content"><code id="code-flexbox"></code></pre></div>
+                </div>
+
+                <div class="tab-panel" data-panel="demo">
+                    <div class="demo-section">
+                        <div class="demo-header"><i class="fas fa-play-circle"></i><h3 data-i18n="demo_header">交互式 DOM 演示</h3></div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge" data-i18n="demo_label_1">演示 1</span> <span data-i18n="demo_flex_jc_title">justify-content 主轴对齐效果</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_select_align">选择对齐方式：</label><div class="btn-group"><button class="demo-btn active" onclick="changeFlexProp('demo-justify', 'justifyContent', 'flex-start', this)">flex-start</button><button class="demo-btn" onclick="changeFlexProp('demo-justify', 'justifyContent', 'center', this)">center</button><button class="demo-btn" onclick="changeFlexProp('demo-justify', 'justifyContent', 'flex-end', this)">flex-end</button><button class="demo-btn" onclick="changeFlexProp('demo-justify', 'justifyContent', 'space-between', this)">space-between</button><button class="demo-btn" onclick="changeFlexProp('demo-justify', 'justifyContent', 'space-around', this)">space-around</button><button class="demo-btn" onclick="changeFlexProp('demo-justify', 'justifyContent', 'space-evenly', this)">space-evenly</button></div></div>
+                            <div class="demo-area" id="demo-justify" style="display:flex; justify-content:flex-start; gap:12px; padding:20px; min-height:100px;"><div class="demo-box" style="background:#6366f1;">A</div><div class="demo-box" style="background:#8b5cf6;">B</div><div class="demo-box" style="background:#a78bfa;">C</div><div class="demo-box" style="background:#c4b5fd;">D</div></div>
+                            <div class="demo-output"><code id="demo-justify-code">justify-content: flex-start;</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge" data-i18n="demo_label_2">演示 2</span> <span data-i18n="demo_flex_ai_title">align-items 交叉轴对齐效果</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_select_align">选择对齐方式：</label><div class="btn-group"><button class="demo-btn active" onclick="changeFlexProp('demo-align', 'alignItems', 'stretch', this)">stretch</button><button class="demo-btn" onclick="changeFlexProp('demo-align', 'alignItems', 'flex-start', this)">flex-start</button><button class="demo-btn" onclick="changeFlexProp('demo-align', 'alignItems', 'center', this)">center</button><button class="demo-btn" onclick="changeFlexProp('demo-align', 'alignItems', 'flex-end', this)">flex-end</button><button class="demo-btn" onclick="changeFlexProp('demo-align', 'alignItems', 'baseline', this)">baseline</button></div></div>
+                            <div class="demo-area" id="demo-align" style="display:flex; align-items:stretch; gap:12px; padding:20px; min-height:160px;"><div class="demo-box" style="background:#ec4899; height:60px; font-size:14px;">A<br><small>60px</small></div><div class="demo-box" style="background:#f472b6; height:90px; font-size:20px;">B<br><small>90px</small></div><div class="demo-box" style="background:#f9a8d4; height:40px; font-size:12px;">C<br><small>40px</small></div><div class="demo-box" style="background:#fbcfe8; height:75px; font-size:18px;">D<br><small>75px</small></div></div>
+                            <div class="demo-output"><code id="demo-align-code">align-items: stretch;</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge" data-i18n="demo_label_3">演示 3</span> <span data-i18n="demo_flex_fd_title">flex-direction 主轴方向</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_select_dir">选择方向：</label><div class="btn-group"><button class="demo-btn active" onclick="changeFlexProp('demo-dir', 'flexDirection', 'row', this)">row</button><button class="demo-btn" onclick="changeFlexProp('demo-dir', 'flexDirection', 'row-reverse', this)">row-reverse</button><button class="demo-btn" onclick="changeFlexProp('demo-dir', 'flexDirection', 'column', this)">column</button><button class="demo-btn" onclick="changeFlexProp('demo-dir', 'flexDirection', 'column-reverse', this)">column-reverse</button></div></div>
+                            <div class="demo-area" id="demo-dir" style="display:flex; flex-direction:row; gap:12px; padding:20px; min-height:120px;"><div class="demo-box" style="background:#14b8a6;">1</div><div class="demo-box" style="background:#2dd4bf;">2</div><div class="demo-box" style="background:#5eead4;">3</div></div>
+                            <div class="demo-output"><code id="demo-dir-code">flex-direction: row;</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge" data-i18n="demo_label_4">演示 4</span> <span data-i18n="demo_flex_grow_title">flex-grow 弹性增长 — 经典三栏布局</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_sidebar_width">左侧边栏宽度：</label><input type="range" min="80" max="300" value="150" id="sidebarRange" oninput="updateSidebar(this.value)"><span id="sidebarVal">150px</span></div>
+                            <div class="demo-area" style="display:flex; gap:8px; padding:16px; min-height:140px;">
+                                <div id="demo-sidebar-l" style="flex:0 0 150px; background:linear-gradient(135deg,#6366f1,#818cf8); border-radius:8px; padding:16px; color:#fff; font-size:13px;"><strong data-i18n="demo_left_sidebar">左侧边栏</strong><br>flex: 0 0 <span id="sb-val">150</span>px</div>
+                                <div style="flex:1; background:linear-gradient(135deg,#3b82f6,#60a5fa); border-radius:8px; padding:16px; color:#fff;"><strong data-i18n="demo_main_content">主内容区</strong><br><span data-i18n="demo_flex_1_desc">flex: 1（自适应填充剩余空间）</span></div>
+                                <div id="demo-sidebar-r" style="flex:0 0 150px; background:linear-gradient(135deg,#8b5cf6,#a78bfa); border-radius:8px; padding:16px; color:#fff; font-size:13px;"><strong data-i18n="demo_right_sidebar">右侧边栏</strong><br>flex: 0 0 <span id="sb-val2">150</span>px</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 视图 2：Grid网格布局 ==================== -->
+    <div id="view-grid" class="page-view">
+        <section class="module-section section-alt" id="grid">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-number">02</div>
+                    <div class="section-title-group">
+                        <h2 class="section-title" data-i18n="sec_grid_title">Grid 网格布局</h2>
+                        <p class="section-subtitle" data-i18n="sec_grid_sub">二维布局的强大武器，行列同时控制，构建复杂页面结构</p>
+                    </div>
+                    <div class="section-icon" style="--accent: #10b981;"><i class="fas fa-th"></i></div>
+                </div>
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="concept"><i class="fas fa-lightbulb"></i> <span data-i18n="tab_concept">核心概念</span></button>
+                    <button class="tab-btn" data-tab="case"><i class="fas fa-briefcase"></i> <span data-i18n="tab_case">案例剖析</span></button>
+                    <button class="tab-btn" data-tab="code"><i class="fas fa-code"></i> <span data-i18n="tab_code">代码示例</span></button>
+                    <button class="tab-btn" data-tab="demo"><i class="fas fa-play-circle"></i> <span data-i18n="tab_demo">交互演示</span></button>
+                </div>
+                <div class="tab-panel active" data-panel="concept">
+                    <div class="knowledge-card">
+                        <div class="knowledge-header"><i class="fas fa-lightbulb"></i><h3 data-i18n="concept_header">核心概念讲解</h3></div>
+                        <div class="knowledge-body"><div class="knowledge-grid">
+                            <div class="knowledge-item"><h4><i class="fas fa-border-all"></i> <span data-i18n="grid_c1_title">什么是 Grid？</span></h4><p data-i18n="grid_c1_desc">CSS Grid 是一种<strong>二维布局系统</strong>，可以同时控制行和列。它非常适合构建整体页面框架和复杂的组件布局。通过 <code>display: grid</code> 激活，使用 <code>grid-template-columns</code> 和 <code>grid-template-rows</code> 定义网格结构。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-ruler-combined"></i> <span data-i18n="grid_c2_title">核心单位 fr</span></h4><p data-i18n="grid_c2_desc"><code>fr</code>（fraction）是Grid独有的弹性单位，表示可用空间的<strong>等份比例</strong>。<br>例如 <code>1fr 2fr 1fr</code> 表示将空间分为4份，中间列占2份。<br>可与 <code>px</code>、<code>%</code>、<code>auto</code> 混合使用。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-draw-polygon"></i> <span data-i18n="grid_c3_title">区域命名</span></h4><p data-i18n="grid_c3_desc">Grid 最强大的特性之一是<strong>命名区域</strong>：<br>• <code>grid-template-areas</code> — 用字符串"画"出布局<br>• <code>grid-area</code> — 子元素声明自己属于哪个区域<br>这种方式直观、可读性极强。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-expand-arrows-alt"></i> <span data-i18n="grid_c4_title">repeat() 与 minmax()</span></h4><p data-i18n="grid_c4_desc">• <code>repeat(3, 1fr)</code> — 重复3列，每列1fr<br>• <code>minmax(200px, 1fr)</code> — 最小200px，最大1fr<br>• <code>auto-fill</code> / <code>auto-fit</code> — 自动填充列数<br>组合使用可创建强大的自适应网格。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-columns"></i> <span data-i18n="grid_c5_title">span 跨行跨列</span></h4><p data-i18n="grid_c5_desc">子元素可通过 <code>grid-column: span 2</code> 或 <code>grid-row: span 3</code> 跨越多个网格轨道，轻松实现不规则的杂志风、仪表盘等复杂布局结构。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-star"></i> <span data-i18n="grid_c6_title">最佳应用场景</span></h4><p data-i18n="grid_c6_desc">整体页面框架、仪表盘、图片画廊、卡片网格、杂志排版等需要<strong>同时精确控制行和列</strong>的复杂二维布局场景，是构建大型页面结构的首选。</p></div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="case">
+                    <div class="case-study-card" style="--case-accent: #10b981;">
+                        <div class="case-header">
+                            <div class="case-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div>
+                                <h3 data-i18n="case_grid_title">实战案例：企业级数据监控仪表盘 (Dashboard)</h3>
+                                <p data-i18n="case_grid_sub">剖析 Grafana、Datadog 等复杂后台系统如何利用 Grid 构建大小不一、错落有致的数据看板。</p>
+                            </div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-diagram grid-diagram">
+                                <div class="gd-item gd-head">Header / TopBar</div><div class="gd-item gd-side">Sidebar Nav</div><div class="gd-item gd-main">Main Chart (span 2)</div><div class="gd-item gd-widget1">Widget A</div><div class="gd-item gd-widget2">Widget B</div><div class="gd-item gd-foot">Footer Logs</div>
+                            </div>
+                            <h4 class="case-subtitle"><i class="fas fa-search-plus"></i> <span data-i18n="case_analysis_title">布局深度剖析</span></h4>
+                            <div class="knowledge-grid">
+                                <div class="knowledge-item"><h4><i class="fas fa-1"></i> <span data-i18n="case_grid_p1_title">宏观骨架：命名区域 (Areas)</span></h4><p data-i18n="case_grid_p1_desc">整个后台页面是一个巨大的 Grid 容器。通过 <code>grid-template-areas</code> 直接“画”出 Header 横跨顶部、Sidebar 占据左侧、Main 占据核心的结构。这种语义化写法让页面骨架一目了然，后期调整区域位置只需修改字符串。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-2"></i> <span data-i18n="case_grid_p2_title">核心图表区：跨列 (Span)</span></h4><p data-i18n="case_grid_p2_desc">Dashboard 中的核心折线图通常需要占据更大的视觉比重。通过给主图表卡片设置 <code>grid-column: span 2;</code>，让它直接跨越两个网格轨道，而旁边的小数据卡片 (Widget) 则各占 1 列，形成主次分明的视觉层级。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-3"></i> <span data-i18n="case_grid_p3_title">侧边栏与主内容区的弹性比例</span></h4><p data-i18n="case_grid_p3_desc">列定义使用 <code>grid-template-columns: 250px 1fr;</code>。侧边栏固定 250px 保证导航不被挤压，主内容区使用 <code>1fr</code> 自动吸收剩余的所有屏幕宽度，完美适配从 13寸笔记本到 27寸外接显示器的各种宽度。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-4"></i> <span data-i18n="case_grid_p4_title">卡片网格的自动填充 (Auto-fit)</span></h4><p data-i18n="case_grid_p4_desc">底部的“服务器状态列表”包含几十个状态卡片。使用 <code>grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));</code>，Grid 会根据屏幕宽度自动计算能放下多少列，无需任何媒体查询即可实现完美的响应式瀑布流效果。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-5"></i> <span data-i18n="case_grid_p5_title">Auto-fit 与 Auto-fill 的本质区别</span></h4><p data-i18n="case_grid_p5_desc"><code>auto-fill</code> 会尽可能多地创建列轨道（即使为空），保留空白区域；而 <code>auto-fit</code> 会在填充后将空轨道折叠为 0，让现有子项拉伸填满剩余空间。在 Dashboard 卡片布局中，通常选用 auto-fit 以避免右侧出现大片空白。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-6"></i> <span data-i18n="case_grid_p6_title">Subgrid 与嵌套对齐的未来</span></h4><p data-i18n="case_grid_p6_desc">当 Dashboard 卡片内部也有复杂的网格结构时，传统 Grid 会导致内外网格线不对齐。<code>subgrid</code> 允许子元素继承父级的网格轨道定义，确保跨卡片的图表Y轴、标签行严格对齐，这是构建专业级数据看板的终极利器。</p></div>
+                            </div>
+
+                            <!-- 🌟 新增：布局架构师思维模型 (理论升华) -->
+                            <div class="layout-theory-box">
+                                <h4 class="theory-title"><i class="fas fa-brain"></i> <span data-i18n="theory_grid_title">🧠 布局架构师思维：二维空间规划与组件化网格</span></h4>
+                                <p class="theory-desc" data-i18n="theory_grid_desc">Grid 的本质不是“画表格”，而是“**定义空间契约**”。在大型系统（如 SaaS 后台、设计工具）中，Grid 是建立全局视觉秩序和组件复用体系的基石。架构师在使用 Grid 时，思考的是“轨道系统”而非“元素位置”。</p>
+                                <ul class="theory-list">
+                                    <li data-i18n="theory_grid_l1"><strong>空间契约与解耦：</strong> 父容器通过 <code>grid-template</code> 定义“插槽（Slots）”，子组件通过 <code>grid-area</code> 声明“入驻”。这种机制实现了 HTML 结构与 CSS 布局的完全解耦。设计师调整页面区块顺序时，只需修改父级的字符串模板，子组件代码零侵入。</li>
+                                    <li data-i18n="theory_grid_l2"><strong>内在尺寸与外在尺寸的博弈：</strong> Grid 是 CSS 中唯一能同时处理“内在尺寸（内容撑开）”与“外在尺寸（容器分配）”的布局。架构师原则：**固定侧边栏用 px，弹性主区用 fr，未知内容区用 minmax()**，以此构建能抵御任何极端数据的“防弹布局”。</li>
+                                    <li data-i18n="theory_grid_l3"><strong>从宏布局到微组件：</strong> 页面级使用 Grid 划分 Header/Sidebar/Main，组件级（如卡片内部）使用 Flexbox 处理对齐。这种“**外 Grid 内 Flex**”的嵌套范式，是目前业界公认的最优页面布局架构模式。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="code"><div class="code-block"><div class="code-header"><div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span class="code-title">grid-layout.css</span><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> <span data-i18n="btn_copy">复制代码</span></button></div><pre class="code-content"><code id="code-grid"></code></pre></div></div>
+                <div class="tab-panel" data-panel="demo">
+                    <div class="demo-section">
+                        <div class="demo-header"><i class="fas fa-play-circle"></i><h3 data-i18n="demo_header">交互式 DOM 演示</h3></div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge green" data-i18n="demo_label_1">演示 1</span> <span data-i18n="demo_grid_col_title">grid-template-columns 列定义</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_col_template">列模板：</label><div class="btn-group"><button class="demo-btn active" onclick="changeGrid('demo-grid1', '1fr 1fr 1fr', this)">1fr 1fr 1fr</button><button class="demo-btn" onclick="changeGrid('demo-grid1', '200px 1fr 200px', this)">200px 1fr 200px</button><button class="demo-btn" onclick="changeGrid('demo-grid1', '1fr 2fr 1fr', this)">1fr 2fr 1fr</button><button class="demo-btn" onclick="changeGrid('demo-grid1', 'auto 1fr auto', this)">auto 1fr auto</button></div></div>
+                            <div class="demo-area" id="demo-grid1" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:16px; min-height:120px;"><div class="demo-box" style="background:#10b981;">Col 1</div><div class="demo-box" style="background:#34d399;">Col 2</div><div class="demo-box" style="background:#6ee7b7;">Col 3</div></div>
+                            <div class="demo-output"><code id="demo-grid1-code">grid-template-columns: 1fr 1fr 1fr;</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge green" data-i18n="demo_label_2">演示 2</span> <span data-i18n="demo_grid_areas_title">grid-template-areas 区域命名布局</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_layout_scheme">布局方案：</label><div class="btn-group"><button class="demo-btn active" onclick="changeGridAreas('classic', this)" data-i18n="demo_scheme_classic">经典布局</button><button class="demo-btn" onclick="changeGridAreas('magazine', this)" data-i18n="demo_scheme_magazine">杂志布局</button><button class="demo-btn" onclick="changeGridAreas('dashboard', this)" data-i18n="demo_scheme_dashboard">仪表盘</button></div></div>
+                            <div class="demo-area" id="demo-grid-areas" style="display:grid; gap:8px; padding:16px; min-height:280px; grid-template-columns: 200px 1fr 200px; grid-template-rows: 50px 1fr 50px; grid-template-areas: 'header header header' 'sidebar main aside' 'footer footer footer';">
+                                <div style="grid-area:header; background:linear-gradient(135deg,#10b981,#34d399); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold;">Header</div>
+                                <div style="grid-area:sidebar; background:linear-gradient(135deg,#059669,#10b981); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold;">Sidebar</div>
+                                <div style="grid-area:main; background:linear-gradient(135deg,#6ee7b7,#a7f3d0); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#065f46; font-weight:bold;">Main Content</div>
+                                <div style="grid-area:aside; background:linear-gradient(135deg,#059669,#10b981); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold;">Aside</div>
+                                <div style="grid-area:footer; background:linear-gradient(135deg,#047857,#059669); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold;">Footer</div>
+                            </div>
+                            <div class="demo-output"><code id="demo-grid-areas-code">grid-template-areas: "header header header" "sidebar main aside" "footer footer footer";</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge green" data-i18n="demo_label_3">演示 3</span> <span data-i18n="demo_grid_auto_title">auto-fit / auto-fill 自适应卡片</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_card_min_width">卡片最小宽度：</label><input type="range" min="100" max="300" value="150" id="gridCardRange" oninput="updateGridCards(this.value)"><span id="gridCardVal">150px</span><span style="margin-left:12px; color:#888; font-size:13px;" data-i18n="demo_drag_hint">← 试试拖动滑块并缩放浏览器窗口</span></div>
+                            <div class="demo-area" id="demo-grid-auto" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; padding:16px;"><div class="demo-box" style="background:#f59e0b;">Card 1</div><div class="demo-box" style="background:#fbbf24;">Card 2</div><div class="demo-box" style="background:#fcd34d;">Card 3</div><div class="demo-box" style="background:#fde68a;">Card 4</div><div class="demo-box" style="background:#fef3c7; color:#92400e;">Card 5</div><div class="demo-box" style="background:#f59e0b;">Card 6</div></div>
+                            <div class="demo-output"><code id="demo-grid-auto-code">grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 视图 3：Float浮动布局 ==================== -->
+    <div id="view-float" class="page-view">
+        <section class="module-section" id="float">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-number">03</div>
+                    <div class="section-title-group">
+                        <h2 class="section-title" data-i18n="sec_float_title">Float 浮动布局</h2>
+                        <p class="section-subtitle" data-i18n="sec_float_sub">经典布局方式的基石，理解文档流与清除浮动的核心原理</p>
+                    </div>
+                    <div class="section-icon" style="--accent: #f59e0b;"><i class="fas fa-water"></i></div>
+                </div>
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="concept"><i class="fas fa-lightbulb"></i> <span data-i18n="tab_concept">核心概念</span></button>
+                    <button class="tab-btn" data-tab="case"><i class="fas fa-briefcase"></i> <span data-i18n="tab_case">案例剖析</span></button>
+                    <button class="tab-btn" data-tab="code"><i class="fas fa-code"></i> <span data-i18n="tab_code">代码示例</span></button>
+                    <button class="tab-btn" data-tab="demo"><i class="fas fa-play-circle"></i> <span data-i18n="tab_demo">交互演示</span></button>
+                </div>
+                <div class="tab-panel active" data-panel="concept">
+                    <div class="knowledge-card">
+                        <div class="knowledge-header"><i class="fas fa-lightbulb"></i><h3 data-i18n="concept_header">核心概念讲解</h3></div>
+                        <div class="knowledge-body"><div class="knowledge-grid">
+                            <div class="knowledge-item"><h4><i class="fas fa-anchor"></i> <span data-i18n="float_c1_title">什么是浮动？</span></h4><p data-i18n="float_c1_desc"><code>float</code> 属性最初设计用于实现<strong>文字环绕图片</strong>效果。设置浮动后，元素会脱离正常文档流，向左或向右移动，直到碰到容器边缘或另一个浮动元素。虽然现代布局推荐Flex/Grid，但理解浮动对维护旧代码和理解CSS原理仍然非常重要。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-exclamation-triangle"></i> <span data-i18n="float_c2_title">浮动塌陷问题</span></h4><p data-i18n="float_c2_desc">当父容器内所有子元素都浮动后，父容器会<strong>高度塌陷为0</strong>，因为浮动元素脱离了文档流。这是浮动布局最经典的问题，必须通过<strong>清除浮动</strong>来解决。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-broom"></i> <span data-i18n="float_c3_title">清除浮动方案</span></h4><p data-i18n="float_c3_desc">• <strong>clearfix 伪元素法</strong>（推荐）：<br><code>.clearfix::after { content:''; display:table; clear:both; }</code><br>• <code>overflow: hidden/auto</code>（触发BFC）<br>• <code>clear: both</code>（添加空元素清除）</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-cube"></i> <span data-i18n="float_c4_title">BFC 块级格式化上下文</span></h4><p data-i18n="float_c4_desc">设置 <code>overflow: hidden/auto</code> 可触发 BFC，BFC 容器会自动包含内部浮动元素，也是一种优雅的清除浮动方案，同时还能防止外边距重叠（margin collapse）。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-ban"></i> <span data-i18n="float_c5_title">浮动的局限性</span></h4><p data-i18n="float_c5_desc">浮动无法实现垂直居中、等高列、复杂对齐。在现代开发中，<strong>布局应优先使用 Flex/Grid</strong>，浮动仅保留给文字环绕等特定场景，不再作为主流布局手段。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-balance-scale"></i> <span data-i18n="float_c6_title">浮动的现代用途</span></h4><p data-i18n="float_c6_desc">虽然不再是主要布局手段，浮动在以下场景仍然有用：<br>• 文字环绕图片/图标<br>• 简单的左右排列（配合clearfix）<br>• 理解BFC（块级格式化上下文）</p></div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="case">
+                    <div class="case-study-card" style="--case-accent: #f59e0b;">
+                        <div class="case-header">
+                            <div class="case-icon"><i class="fas fa-newspaper"></i></div>
+                            <div>
+                                <h3 data-i18n="case_float_title">实战案例：新闻门户网站的图文混排与 BFC 陷阱</h3>
+                                <p data-i18n="case_float_sub">剖析传统新闻网站（如新浪、网易）中经典的“左图右文”新闻列表，以及新手常踩的“高度塌陷”坑。</p>
+                            </div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-diagram float-diagram">
+                                <div class="fd-img">[ News Image ]</div>
+                                <div class="fd-text"><p><strong data-i18n="case_float_news_title">突发：CSS Grid 正式发布十周年！</strong></p><p data-i18n="case_float_news_body">十年前，W3C 正式发布了 CSS Grid 布局规范，彻底改变了前端工程师构建二维网页布局的方式。从最初的 IE10 实验性支持，到如今所有现代浏览器的完美兼容，Grid 已经成为了...</p><p class="fd-more" data-i18n="case_float_read_more">阅读更多 →</p></div>
+                            </div>
+                            <h4 class="case-subtitle"><i class="fas fa-search-plus"></i> <span data-i18n="case_analysis_title">布局深度剖析</span></h4>
+                            <div class="knowledge-grid">
+                                <div class="knowledge-item"><h4><i class="fas fa-1"></i> <span data-i18n="case_float_p1_title">图文环绕的初心</span></h4><p data-i18n="case_float_p1_desc">在新闻列表中，给缩略图设置 <code>float: left; margin-right: 16px;</code>，后续的文本段落就会自动环绕在图片右侧和下方。这是 float 被发明出来的<strong>唯一初衷</strong>，至今在处理富文本编辑器输出的图文混排内容时，依然是最佳方案。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-2"></i> <span data-i18n="case_float_p2_title">致命的“高度塌陷”</span></h4><p data-i18n="case_float_p2_desc">如果新闻卡片（父容器）没有设置固定高度，且内部只有浮动的图片和普通的文本，当文本较少时，父容器的高度会<strong>直接塌陷为 0</strong>，导致下方的新闻列表叠在当前列表之上，页面瞬间崩坏。这是因为浮动元素脱离了标准文档流。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-3"></i> <span data-i18n="case_float_p3_title">优雅破局：触发 BFC</span></h4><p data-i18n="case_float_p3_desc">给新闻卡片父容器加上 <code>overflow: hidden;</code> 或 <code>overflow: auto;</code>。这会触发 <strong>BFC (块级格式化上下文)</strong>。BFC 的一个重要特性就是：在计算高度时，会将内部的浮动元素也计算在内，从而完美撑开父容器。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-4"></i> <span data-i18n="case_float_p4_title">经典 Clearfix Hack</span></h4><p data-i18n="case_float_p4_desc">如果父容器不能设置 <code>overflow: hidden</code>（比如有下拉菜单需要溢出显示），则必须使用 <code>.clearfix::after</code> 伪元素法。在父容器末尾生成一个看不见的块级元素并设置 <code>clear: both;</code>，强行把父容器底部“顶”下来。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-5"></i> <span data-i18n="case_float_p5_title">BFC 的另一面：阻止 Margin 重叠</span></h4><p data-i18n="case_float_p5_desc">BFC 不仅能清除浮动，还能<strong>阻止相邻块级元素的垂直 margin 折叠</strong>。当两个新闻卡片之间 margin 合并导致间距异常时，将其中一个包裹在 BFC 容器中（如 overflow:hidden 的 div），即可让它们各自的 margin 独立生效。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-6"></i> <span data-i18n="case_float_p6_title">浮动元素的“阶梯效应”与修复</span></h4><p data-i18n="case_float_p6_desc">当多个浮动卡片高度不一致时，后续卡片可能会被前面的高卡片“卡住”，产生参差不齐的阶梯状错位。这是因为浮动元素只会紧贴前一个浮动元素的边缘。现代开发中应使用 Grid/Flex 替代，若必须用浮动，需确保同排元素等高或使用 JS 补丁。</p></div>
+                            </div>
+
+                            <!-- 🌟 新增：布局架构师思维模型 (理论升华) -->
+                            <div class="layout-theory-box">
+                                <h4 class="theory-title"><i class="fas fa-brain"></i> <span data-i18n="theory_float_title">🧠 布局架构师思维：文档流本质与 BFC 隔离机制</span></h4>
+                                <p class="theory-desc" data-i18n="theory_float_desc">学习 Float 的终极目的不是为了“用它来布局”，而是为了**深刻理解 CSS 的“正常文档流（Normal Flow）”与“格式化上下文”**。这是所有高级 CSS 渲染机制的底层基石，不懂 BFC，就无法真正驾驭复杂的页面层叠与间距控制。</p>
+                                <ul class="theory-list">
+                                    <li data-i18n="theory_float_l1"><strong>文档流的物理法则：</strong> 块级元素自上而下堆叠，行内元素自左向右排列。Float 和 Absolute 的本质是“**打破物理法则（脱离文档流）**”。架构师在设计页面时，必须清晰界定哪些元素在“流内”（参与高度计算），哪些在“流外”（绝对定位/浮动），这是避免页面高度塌陷和滚动条异常的前提。</li>
+                                    <li data-i18n="theory_float_l2"><strong>BFC 的“结界”理论：</strong> BFC（块级格式化上下文）相当于在页面中创建了一个“**独立的渲染结界**”。结界内部的布局（浮动、margin 折叠）绝对不会影响结界外部。利用这个理论，我们可以精准解决外边距穿透、文字意外环绕等疑难杂症，这是高级 CSS 工程师的必修课。</li>
+                                    <li data-i18n="theory_float_l3"><strong>历史包袱与技术选型：</strong> 在维护百万行代码的遗留系统时，盲目将 Float 重构为 Flex 可能会引发不可预知的回归 Bug。架构师的素养在于：**在新项目中坚决拥抱 Flex/Grid，在旧项目中利用 BFC 理论精准修补 Float 缺陷**，实现技术债务的平滑过渡。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="code"><div class="code-block"><div class="code-header"><div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span class="code-title">float-layout.css</span><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> <span data-i18n="btn_copy">复制代码</span></button></div><pre class="code-content"><code id="code-float"></code></pre></div></div>
+                <div class="tab-panel" data-panel="demo">
+                    <div class="demo-section">
+                        <div class="demo-header"><i class="fas fa-play-circle"></i><h3 data-i18n="demo_header">交互式 DOM 演示</h3></div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge orange" data-i18n="demo_label_1">演示 1</span> <span data-i18n="demo_float_vs_title">浮动效果 vs 清除浮动</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_operation">操作：</label><div class="btn-group"><button class="demo-btn active" onclick="toggleFloat('float-demo', true, this)" data-i18n="demo_enable_float">开启浮动</button><button class="demo-btn" onclick="toggleFloat('float-demo', false, this)" data-i18n="demo_disable_float">关闭浮动</button><button class="demo-btn" onclick="toggleClearfix('float-demo', this)" data-i18n="demo_add_clearfix">添加 clearfix</button></div></div>
+                            <div class="demo-area" id="float-demo" style="padding:16px; min-height:140px; border:2px dashed #f59e0b; position:relative;">
+                                <div class="float-child" style="float:left; width:45%; background:linear-gradient(135deg,#f59e0b,#fbbf24); padding:20px; border-radius:8px; color:#fff; margin:0 5% 10px 0;"><strong data-i18n="demo_left_float">左侧浮动</strong><br>float: left; width: 45%;</div>
+                                <div class="float-child" style="float:left; width:45%; background:linear-gradient(135deg,#d97706,#f59e0b); padding:20px; border-radius:8px; color:#fff;"><strong data-i18n="demo_right_float">右侧浮动</strong><br>float: left; width: 45%;</div>
+                            </div>
+                            <div class="demo-output"><code id="float-demo-code">子元素: float: left; width: 45%; ⚠️ 父容器高度塌陷!</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge orange" data-i18n="demo_label_2">演示 2</span> <span data-i18n="demo_float_wrap_title">文字环绕图片效果</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_float_dir">浮动方向：</label><div class="btn-group"><button class="demo-btn active" onclick="changeImgFloat('left', this)">float: left</button><button class="demo-btn" onclick="changeImgFloat('right', this)">float: right</button><button class="demo-btn" onclick="changeImgFloat('none', this)">float: none</button></div></div>
+                            <div class="demo-area" style="padding:20px; min-height:180px;">
+                                <div id="float-img" style="float:left; width:120px; height:120px; background:linear-gradient(135deg,#f59e0b,#fbbf24); border-radius:12px; margin:0 16px 10px 0; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; font-size:14px;"><i class="fas fa-image" style="font-size:32px;"></i></div>
+                                <p style="line-height:1.8; color:#555; font-size:14px;" data-i18n="demo_float_wrap_text">这是一段演示文字环绕图片效果的段落。当图片设置了 <code>float: left</code> 后，后续的文字内容会自动环绕在图片的右侧和下方。这是float属性最初被设计的目的。在现代CSS中，虽然布局方面已被Flex和Grid取代，但文字环绕效果仍然使用float来实现。你可以通过上方的按钮切换浮动方向，观察文字如何重新排列。CSS的float属性接受 <code>left</code>、<code>right</code>和<code>none</code>三个值。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 视图 4：Position定位布局 ==================== -->
+    <div id="view-position" class="page-view">
+        <section class="module-section section-alt" id="position">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-number">04</div>
+                    <div class="section-title-group">
+                        <h2 class="section-title" data-i18n="sec_pos_title">Position 定位布局</h2>
+                        <p class="section-subtitle" data-i18n="sec_pos_sub">精确控制元素位置，实现固定导航、悬浮按钮、遮罩层等效果</p>
+                    </div>
+                    <div class="section-icon" style="--accent: #ef4444;"><i class="fas fa-crosshairs"></i></div>
+                </div>
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="concept"><i class="fas fa-lightbulb"></i> <span data-i18n="tab_concept">核心概念</span></button>
+                    <button class="tab-btn" data-tab="case"><i class="fas fa-briefcase"></i> <span data-i18n="tab_case">案例剖析</span></button>
+                    <button class="tab-btn" data-tab="code"><i class="fas fa-code"></i> <span data-i18n="tab_code">代码示例</span></button>
+                    <button class="tab-btn" data-tab="demo"><i class="fas fa-play-circle"></i> <span data-i18n="tab_demo">交互演示</span></button>
+                </div>
+                <div class="tab-panel active" data-panel="concept">
+                    <div class="knowledge-card">
+                        <div class="knowledge-header"><i class="fas fa-lightbulb"></i><h3 data-i18n="concept_header">核心概念讲解</h3></div>
+                        <div class="knowledge-body"><div class="knowledge-grid">
+                            <div class="knowledge-item"><h4><i class="fas fa-map-pin"></i> <span data-i18n="pos_c1_title">static（默认）</span></h4><p data-i18n="pos_c1_desc">元素的默认定位方式，按照<strong>正常文档流</strong>排列。设置 <code>top</code>、<code>left</code> 等偏移属性<strong>无效</strong>。大多数元素天生就是static定位。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-arrows-alt"></i> <span data-i18n="pos_c2_title">relative（相对定位）</span></h4><p data-i18n="pos_c2_desc">相对于元素<strong>自身原始位置</strong>进行偏移。元素仍然占据原来的空间（不影响其他元素布局）。常用作 <code>absolute</code> 子元素的定位参考点（"子绝父相"原则）。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-crosshairs"></i> <span data-i18n="pos_c3_title">absolute（绝对定位）</span></h4><p data-i18n="pos_c3_desc">脱离文档流，相对于<strong>最近的非static定位祖先元素</strong>进行定位。如果没有这样的祖先，则相对于 <code>&lt;html&gt;</code>。元素不占据空间，其他元素会"无视"它。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-thumbtack"></i> <span data-i18n="pos_c4_title">fixed（固定定位）</span></h4><p data-i18n="pos_c4_desc">相对于<strong>浏览器视口</strong>固定，页面滚动时位置不移动。典型应用包括：固定导航栏、回到顶部按钮、悬浮广告和全屏模态框遮罩层。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-hand-paper"></i> <span data-i18n="pos_c5_title">sticky（粘性定位）</span></h4><p data-i18n="pos_c5_desc">混合定位：滚动到阈值前为 relative，到达后变为 fixed。典型应用：吸顶标题、表格固定表头、侧边栏跟随滚动，兼具相对和固定定位的优点。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-layer-group"></i> <span data-i18n="pos_c6_title">z-index 层叠顺序</span></h4><p data-i18n="pos_c6_desc">控制定位元素的<strong>前后堆叠顺序</strong>。值越大越靠前（离用户越近）。仅在 position 非 static 时生效，使用时需注意层叠上下文的创建规则。</p></div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="case">
+                    <div class="case-study-card" style="--case-accent: #ef4444;">
+                        <div class="case-header">
+                            <div class="case-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div>
+                                <h3 data-i18n="case_pos_title">实战案例：电商商品卡片与全局悬浮客服系统</h3>
+                                <p data-i18n="case_pos_sub">剖析淘宝、京东等电商平台中，商品卡片上的“热销角标”以及页面右下角的“全局悬浮客服/购物车”按钮。</p>
+                            </div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-diagram pos-diagram">
+                                <div class="pd-card"><div class="pd-badge">HOT</div><div class="pd-img">[ Product Image ]</div><div class="pd-info"><div class="pd-title" data-i18n="case_pos_product_name">无线降噪耳机</div><div class="pd-price">¥ 299.00</div></div></div>
+                                <div class="pd-fab"><i class="fas fa-headset"></i></div>
+                            </div>
+                            <h4 class="case-subtitle"><i class="fas fa-search-plus"></i> <span data-i18n="case_analysis_title">布局深度剖析</span></h4>
+                            <div class="knowledge-grid">
+                                <div class="knowledge-item"><h4><i class="fas fa-1"></i> <span data-i18n="case_pos_p1_title">子绝父相：商品角标定位</span></h4><p data-i18n="case_pos_p1_desc">商品卡片本身是一个正常的文档流元素（Relative），而左上角的“HOT”角标使用 Absolute 定位。通过 <code>top: -10px; left: -10px;</code> 让角标产生“溢出”卡片的视觉效果。父容器必须设置 <code>position: relative;</code> 作为定位锚点。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-2"></i> <span data-i18n="case_pos_p2_title">Fixed 全局悬浮：脱离文档流</span></h4><p data-i18n="case_pos_p2_desc">页面右下角的客服按钮使用 <code>position: fixed; bottom: 30px; right: 30px;</code>。无论用户如何上下滚动浏览几千个商品，这个按钮永远“钉”在视口的右下角。它完全脱离了文档流，不会占据任何页面空间。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-3"></i> <span data-i18n="case_pos_p3_title">遮罩层与 Z-index 层级管理</span></h4><p data-i18n="case_pos_p3_desc">点击客服按钮弹出的对话框，需要一个半透明的黑色遮罩层。遮罩层使用 <code>position: fixed; inset: 0; z-index: 998;</code> 覆盖全屏，而对话框本身使用 <code>z-index: 999;</code> 浮在遮罩层之上。合理的 z-index 规划是避免“层级地狱”的关键。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-4"></i> <span data-i18n="case_pos_p4_title">Sticky 吸顶分类导航</span></h4><p data-i18n="case_pos_p4_desc">在商品列表页顶部的“综合、销量、价格”排序栏，使用 <code>position: sticky; top: 64px;</code>（假设顶部有 64px 的固定导航）。当页面向下滚动时，排序栏会“粘”在固定导航的下方，方便用户随时切换排序规则。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-5"></i> <span data-i18n="case_pos_p5_title">层叠上下文 (Stacking Context) 陷阱</span></h4><p data-i18n="case_pos_p5_desc">z-index 并非全局比较，而是在各自的<strong>层叠上下文</strong>内比较。如果父元素设置了 transform、opacity&lt;1 或 filter，就会创建新的层叠上下文。此时子元素的 z-index 再大也无法超越父级兄弟元素，这是电商弹窗被遮挡的最常见原因。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-6"></i> <span data-i18n="case_pos_p6_title">Fixed 在移动端 Safari 的抖动问题</span></h4><p data-i18n="case_pos_p6_desc">iOS Safari 在滚动时对 fixed 元素的处理曾有历史遗留问题（地址栏收起时 fixed 元素跳动）。现代解决方案是使用 <code>position: sticky</code> 替代非必要的全局 fixed，或将 fixed 元素放在 body 直接子级，避免嵌套在 overflow:scroll 的容器内。</p></div>
+                            </div>
+
+                            <!-- 🌟 新增：布局架构师思维模型 (理论升华) -->
+                            <div class="layout-theory-box">
+                                <h4 class="theory-title"><i class="fas fa-brain"></i> <span data-i18n="theory_pos_title">🧠 布局架构师思维：三维空间坐标系与层级治理</span></h4>
+                                <p class="theory-desc" data-i18n="theory_pos_desc">Position 将网页从“二维平面”拉升到了“三维空间（Z轴）”。在企业级复杂系统（如 Figma、在线文档、大型电商）中，定位布局的核心挑战不再是“放在哪”，而是“**如何建立全局的 Z-index 层级治理体系与坐标系锚点管理**”。</p>
+                                <ul class="theory-list">
+                                    <li data-i18n="theory_pos_l1"><strong>坐标系锚点理论 (Containing Block)：</strong> Absolute 元素的定位基准不是“父元素”，而是“最近的已定位（非 static）祖先元素”。架构师在设计复杂组件（如带下拉菜单的表格行）时，必须精确控制“定位锚点”的创建位置，否则会导致下拉菜单被表格的 <code>overflow: hidden</code> 截断。</li>
+                                    <li data-i18n="theory_pos_l2"><strong>Z-index 层级治理规范：</strong> 杜绝在项目中随意写 <code>z-index: 9999</code>。专业团队必须建立“**层级令牌 (Z-index Tokens)**”体系：如 Base(0), Dropdown(100), Sticky(200), Overlay(300), Modal(400), Toast(500)。通过 CSS 变量统一管理，彻底消灭“弹窗被遮挡”的幽灵 Bug。</li>
+                                    <li data-i18n="theory_pos_l3"><strong>层叠上下文的“降维打击”：</strong> 必须深刻理解：<code>transform</code>、<code>opacity < 1</code>、<code>filter</code> 等属性会隐式创建新的层叠上下文。这意味着一个 <code>z-index: 9999</code> 的子元素，如果其父级被降维，它永远无法超越父级的兄弟元素。这是现代 CSS 动画与定位冲突的重灾区。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="code"><div class="code-block"><div class="code-header"><div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span class="code-title">position-layout.css</span><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> <span data-i18n="btn_copy">复制代码</span></button></div><pre class="code-content"><code id="code-position"></code></pre></div></div>
+                <div class="tab-panel" data-panel="demo">
+                    <div class="demo-section">
+                        <div class="demo-header"><i class="fas fa-play-circle"></i><h3 data-i18n="demo_header">交互式 DOM 演示</h3></div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge red" data-i18n="demo_label_1">演示 1</span> <span data-i18n="demo_pos_compare_title">五种定位方式对比</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_select_pos_type">选择定位类型：</label><div class="btn-group"><button class="demo-btn active" onclick="changePosition('pos-demo-box', 'static', this)">static</button><button class="demo-btn" onclick="changePosition('pos-demo-box', 'relative', this)">relative</button><button class="demo-btn" onclick="changePosition('pos-demo-box', 'absolute', this)">absolute</button><button class="demo-btn" onclick="changePosition('pos-demo-box', 'fixed', this)">fixed</button><button class="demo-btn" onclick="changePosition('pos-demo-box', 'sticky', this)">sticky</button></div><button class="demo-btn" style="margin-left:12px; background:#ef4444; color:#fff;" onclick="resetPositionDemo()"><i class="fas fa-undo"></i> <span data-i18n="btn_reset">重置</span></button></div>
+                            <div class="demo-area" id="pos-demo-container" style="position:relative; padding:20px; min-height:200px; overflow:auto; max-height:300px;">
+                                <p style="color:#888; font-size:13px; margin:0 0 10px 0;" data-i18n="demo_container_start">↓ 容器开始</p>
+                                <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-bottom:10px;" data-i18n="demo_placeholder_1">占位元素 1（正常文档流）</div>
+                                <div id="pos-demo-box" style="background:linear-gradient(135deg,#ef4444,#f87171); color:#fff; padding:16px; border-radius:8px; font-weight:bold; text-align:center; transition: all 0.3s;">目标元素 (position: static)</div>
+                                <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-top:10px;" data-i18n="demo_placeholder_2">占位元素 2（正常文档流）</div>
+                                <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-top:10px;" data-i18n="demo_placeholder_3">占位元素 3</div>
+                                <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-top:10px;" data-i18n="demo_placeholder_4">占位元素 4</div>
+                                <div style="background:#f1f5f9; padding:10px; border-radius:6px; margin-top:10px;" data-i18n="demo_placeholder_5">占位元素 5</div>
+                                <p style="color:#888; font-size:13px; margin:10px 0 0 0;" data-i18n="demo_container_end">↑ 容器结束</p>
+                            </div>
+                            <div class="demo-output"><code id="pos-demo-code">position: static; （默认值，top/left偏移无效）</code></div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge red" data-i18n="demo_label_2">演示 2</span> <span data-i18n="demo_pos_badge_title">"子绝父相"实战 — 卡片角标定位</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_badge_pos">角标位置：</label><div class="btn-group"><button class="demo-btn active" onclick="moveBadge('top:-10px;right:-10px', this)" data-i18n="demo_top_right">右上</button><button class="demo-btn" onclick="moveBadge('top:-10px;left:-10px', this)" data-i18n="demo_top_left">左上</button><button class="demo-btn" onclick="moveBadge('bottom:-10px;right:-10px', this)" data-i18n="demo_bottom_right">右下</button><button class="demo-btn" onclick="moveBadge('bottom:-10px;left:-10px', this)" data-i18n="demo_bottom_left">左下</button></div></div>
+                            <div class="demo-area" style="display:flex; justify-content:center; padding:40px;">
+                                <div style="position:relative; background:linear-gradient(135deg,#1e293b,#334155); padding:30px; border-radius:16px; color:#fff; width:250px; text-align:center;">
+                                    <div id="pos-badge" style="position:absolute; top:-10px; right:-10px; background:#ef4444; color:#fff; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:14px; box-shadow:0 2px 8px rgba(239,68,68,0.5); transition: all 0.3s;">3</div>
+                                    <i class="fas fa-bell" style="font-size:32px; margin-bottom:10px; color:#fbbf24;"></i>
+                                    <h4 style="margin:0 0 5px 0;" data-i18n="demo_notify_card">通知卡片</h4>
+                                    <p style="margin:0; font-size:13px; color:#94a3b8;" data-i18n="demo_relative_parent">position: relative 的父容器</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 视图 5：响应式布局 ==================== -->
+    <div id="view-responsive" class="page-view">
+        <section class="module-section" id="responsive">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-number">05</div>
+                    <div class="section-title-group">
+                        <h2 class="section-title" data-i18n="sec_resp_title">响应式布局与媒体查询</h2>
+                        <p class="section-subtitle" data-i18n="sec_resp_sub">一套代码适配所有设备，从手机到桌面完美呈现</p>
+                    </div>
+                    <div class="section-icon" style="--accent: #8b5cf6;"><i class="fas fa-mobile-alt"></i></div>
+                </div>
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-tab="concept"><i class="fas fa-lightbulb"></i> <span data-i18n="tab_concept">核心概念</span></button>
+                    <button class="tab-btn" data-tab="case"><i class="fas fa-briefcase"></i> <span data-i18n="tab_case">案例剖析</span></button>
+                    <button class="tab-btn" data-tab="code"><i class="fas fa-code"></i> <span data-i18n="tab_code">代码示例</span></button>
+                    <button class="tab-btn" data-tab="demo"><i class="fas fa-play-circle"></i> <span data-i18n="tab_demo">交互演示</span></button>
+                </div>
+                <div class="tab-panel active" data-panel="concept">
+                    <div class="knowledge-card">
+                        <div class="knowledge-header"><i class="fas fa-lightbulb"></i><h3 data-i18n="concept_header">核心概念讲解</h3></div>
+                        <div class="knowledge-body"><div class="knowledge-grid">
+                            <div class="knowledge-item"><h4><i class="fas fa-mobile-alt"></i> <span data-i18n="resp_c1_title">什么是响应式设计？</span></h4><p data-i18n="resp_c1_desc">响应式网页设计（Responsive Web Design, RWD）是指网页能够<strong>自动适应不同屏幕尺寸</strong>，在手机、平板、桌面等设备上都能提供良好的浏览体验。核心技术包括：视口设置、媒体查询、弹性布局和弹性图片。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-code"></i> <span data-i18n="resp_c2_title">媒体查询 @media</span></h4><p data-i18n="resp_c2_desc">媒体查询是响应式设计的核心工具，它允许根据设备特性（如屏幕宽度）应用不同的CSS样式：<br><code>@media (max-width: 768px) { ... }</code><br>常用断点：576px（手机）、768px（平板）、992px（小桌面）、1200px（大桌面）。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-tachometer-alt"></i> <span data-i18n="resp_c3_title">移动优先策略</span></h4><p data-i18n="resp_c3_desc"><strong>Mobile First</strong> 是现代响应式设计的最佳实践：<br>• 先编写手机端样式（基础样式）<br>• 再通过 <code>min-width</code> 媒体查询逐步增强大屏样式<br>这种方式性能更好，代码更简洁。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-text-height"></i> <span data-i18n="resp_c4_title">弹性单位</span></h4><p data-i18n="resp_c4_desc">响应式设计中推荐使用相对单位：<br>• <code>rem</code> — 相对于根元素字号<br>• <code>em</code> — 相对于父元素字号<br>• <code>vw/vh</code> — 视口宽度/高度的百分比<br>• <code>%</code> — 父元素的百分比<br>• <code>clamp()</code> — 设定最小、首选、最大值</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-eye"></i> <span data-i18n="resp_c5_title">viewport meta 标签</span></h4><p data-i18n="resp_c5_desc"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> 是响应式的<strong>必要前提</strong>。缺少它，移动端浏览器会默认按桌面宽度（通常980px）渲染页面然后再缩小显示。</p></div>
+                            <div class="knowledge-item"><h4><i class="fas fa-star"></i> <span data-i18n="resp_c6_title">常用断点参考</span></h4><p data-i18n="resp_c6_desc">576px（手机横屏）、768px（平板竖屏）、992px（小桌面）、1200px（大桌面）、1440px（超大屏）。断点应根据内容自然断裂点设定，而非死记硬背特定设备尺寸。</p></div>
+                        </div></div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="case">
+                    <div class="case-study-card" style="--case-accent: #8b5cf6;">
+                        <div class="case-header">
+                            <div class="case-icon"><i class="fas fa-globe"></i></div>
+                            <div>
+                                <h3 data-i18n="case_resp_title">实战案例：企业官网的“移动优先”全端适配重构</h3>
+                                <p data-i18n="case_resp_sub">剖析一个真实的企业官网如何从“只在电脑上看”重构为“手机、平板、带鱼屏完美适配”的响应式架构。</p>
+                            </div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-diagram resp-diagram">
+                                <div class="rd-mobile"><div class="rm-header">☰ Logo</div><div class="rm-hero">Hero (100vh)</div><div class="rm-card">Card 1</div><div class="rm-card">Card 2</div></div>
+                                <div class="rd-arrow">→ @media (min-width: 768px) →</div>
+                                <div class="rd-desktop"><div class="rt-header">Logo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nav Links &nbsp;&nbsp;&nbsp;&nbsp; Login</div><div class="rt-hero">Hero (Left Text | Right Image)</div><div class="rt-cards"><div class="rc-item">Card 1</div><div class="rc-item">Card 2</div><div class="rc-item">Card 3</div></div></div>
+                            </div>
+                            <h4 class="case-subtitle"><i class="fas fa-search-plus"></i> <span data-i18n="case_analysis_title">布局深度剖析</span></h4>
+                            <div class="knowledge-grid">
+                                <div class="knowledge-item"><h4><i class="fas fa-1"></i> <span data-i18n="case_resp_p1_title">导航栏的“汉堡菜单”变身</span></h4><p data-i18n="case_resp_p1_desc">在基础样式（手机端）中，导航链接 <code>display: none;</code>，只显示汉堡图标。当 <code>@media (min-width: 768px)</code> 时，隐藏汉堡图标，将导航链接设为 <code>display: flex;</code>。这种“渐进增强”的策略保证了移动端加载最少的无用 DOM。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-2"></i> <span data-i18n="case_resp_p2_title">卡片网格的断点裂变</span></h4><p data-i18n="case_resp_p2_desc">服务介绍卡片在手机端是单列堆叠（<code>grid-template-columns: 1fr;</code>）。在 768px 平板断点裂变为 2 列（<code>repeat(2, 1fr)</code>），在 1024px 桌面端裂变为 3 列。结合 <code>gap</code> 属性，无需计算任何百分比宽度。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-3"></i> <span data-i18n="case_resp_p3_title">流体排版 (Fluid Typography)</span></h4><p data-i18n="case_resp_p3_desc">放弃写死 <code>font-size: 48px;</code>。使用 <code>clamp(1.5rem, 5vw, 3rem);</code>。这意味着字号会根据视口宽度（5vw）自动缩放，但永远不会小于 1.5rem，也不会大于 3rem。一行代码解决所有设备的字号适配。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-4"></i> <span data-i18n="case_resp_p4_title">图片的响应式与艺术指导</span></h4><p data-i18n="case_resp_p4_desc">基础设置 <code>max-width: 100%; height: auto;</code> 防止图片撑破容器。进阶使用 <code>&lt;picture&gt;</code> 标签配合 <code>srcset</code>，在手机端加载裁切后的竖版焦点图，在桌面端加载完整的横版大图，兼顾视觉与性能。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-5"></i> <span data-i18n="case_resp_p5_title">触控目标尺寸与无障碍 (A11y)</span></h4><p data-i18n="case_resp_p5_desc">响应式不仅是视觉适配，更是交互适配。WCAG 标准要求移动端可点击区域至少为 <strong>44x44px</strong>。在媒体查询中，除了调整布局，还需增大按钮 padding、扩大热区，确保手指粗的用户也能精准点击，避免误触。</p></div>
+                                <div class="knowledge-item"><h4><i class="fas fa-6"></i> <span data-i18n="case_resp_p6_title">Container Queries：组件级响应式</span></h4><p data-i18n="case_resp_p6_desc">传统媒体查询基于<strong>视口宽度</strong>，导致同一组件在侧边栏和主内容区表现不同。<code>@container</code> 查询让组件根据自身<strong>父容器宽度</strong>自适应，真正实现“一次编写，随处复用”的原子化响应式组件架构。</p></div>
+                            </div>
+
+                            <!-- 🌟 新增：布局架构师思维模型 (理论升华) -->
+                            <div class="layout-theory-box">
+                                <h4 class="theory-title"><i class="fas fa-brain"></i> <span data-i18n="theory_resp_title">🧠 布局架构师思维：从设备适配到内容优先的响应式哲学</span></h4>
+                                <p class="theory-desc" data-i18n="theory_resp_desc">响应式设计的最高境界不是“为每种设备写一套样式”，而是“**让内容像水一样，自然流淌进任何形状的容器**”。现代架构师已经摒弃了“死记硬背设备断点”的旧思维，转向了“内容驱动断点”与“内在 Web 设计 (Intrinsic Web Design)”的新范式。</p>
+                                <ul class="theory-list">
+                                    <li data-i18n="theory_resp_l1"><strong>内容驱动断点 (Content-Driven Breakpoints)：</strong> 不要基于 iPhone 或 iPad 的物理尺寸设定断点。正确的做法是：在浏览器中不断缩放窗口，**当内容开始显得拥挤、文字开始换行难看、留白开始失衡的那个像素点，就是你的断点**。这保证了布局永远服务于内容，而非服务于特定硬件。</li>
+                                    <li data-i18n="theory_resp_l2"><strong>现代流体设计公式：</strong> 彻底消灭媒体查询中的“阶梯式字号覆盖”。全面采用 <code>clamp(MIN, PREFERRED, MAX)</code> 结合视口单位（vw/vh），实现真正的“无级变速”流体排版与间距。这让代码量锐减，且在任何奇奇怪怪的折叠屏、带鱼屏上都能完美呈现。</li>
+                                    <li data-i18n="theory_resp_l3"><strong>容器查询 (Container Queries) 的降维打击：</strong> 传统的 Media Queries 是“看天吃饭”（依赖浏览器视口），而 Container Queries 是“因地制宜”（依赖父容器宽度）。这是 CSS 历史上最重要的范式转移，它让 UI 组件真正实现了“**高内聚、低耦合**”的原子化响应式，是构建大型设计系统 (Design System) 的终极武器。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel" data-panel="code"><div class="code-block"><div class="code-header"><div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span class="code-title">responsive-layout.css</span><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> <span data-i18n="btn_copy">复制代码</span></button></div><pre class="code-content"><code id="code-responsive"></code></pre></div></div>
+                <div class="tab-panel" data-panel="demo">
+                    <div class="demo-section">
+                        <div class="demo-header"><i class="fas fa-play-circle"></i><h3 data-i18n="demo_header">交互式 DOM 演示</h3></div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge purple" data-i18n="demo_label_1">演示 1</span> <span data-i18n="demo_resp_viewport_title">模拟不同设备视口宽度</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_simulate_device">模拟设备：</label><div class="btn-group"><button class="demo-btn" onclick="simulateDevice(375, this)"><i class="fas fa-mobile-alt"></i> <span data-i18n="demo_device_mobile">手机 (375px)</span></button><button class="demo-btn" onclick="simulateDevice(768, this)"><i class="fas fa-tablet-alt"></i> <span data-i18n="demo_device_tablet">平板 (768px)</span></button><button class="demo-btn active" onclick="simulateDevice(1024, this)"><i class="fas fa-laptop"></i> <span data-i18n="demo_device_laptop">笔记本 (1024px)</span></button><button class="demo-btn" onclick="simulateDevice(1440, this)"><i class="fas fa-desktop"></i> <span data-i18n="demo_device_desktop">桌面 (1440px)</span></button></div></div>
+                            <div style="display:flex; justify-content:center; padding:20px; background:#f8fafc; border-radius:12px;">
+                                <div id="device-frame" style="width:100%; max-width:1024px; border:3px solid #1e293b; border-radius:12px; overflow:hidden; transition: all 0.5s ease; background:#fff;">
+                                    <div style="background:#1e293b; padding:8px 16px; display:flex; align-items:center; gap:8px;">
+                                        <div style="display:flex; gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#ef4444;"></span><span style="width:10px;height:10px;border-radius:50%;background:#fbbf24;"></span><span style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></span></div>
+                                        <span id="device-url" style="flex:1; background:#334155; padding:4px 12px; border-radius:4px; color:#94a3b8; font-size:12px; text-align:center;">https://my-responsive-site.com</span>
+                                    </div>
+                                    <div id="device-content" style="padding:16px; min-height:200px;">
+                                        <div id="responsive-demo-inner" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+                                            <div style="background:linear-gradient(135deg,#8b5cf6,#a78bfa); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 1</strong><br>Content</div>
+                                            <div style="background:linear-gradient(135deg,#7c3aed,#8b5cf6); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 2</strong><br>Content</div>
+                                            <div style="background:linear-gradient(135deg,#6d28d9,#7c3aed); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 3</strong><br>Content</div>
+                                            <div style="background:linear-gradient(135deg,#5b21b6,#6d28d9); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 4</strong><br>Content</div>
+                                            <div style="background:linear-gradient(135deg,#4c1d95,#5b21b6); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 5</strong><br>Content</div>
+                                            <div style="background:linear-gradient(135deg,#8b5cf6,#c4b5fd); padding:16px; border-radius:8px; color:#fff; font-size:12px;"><strong>Card 6</strong><br>Content</div>
+                                        </div>
+                                        <p id="device-info" style="text-align:center; margin-top:12px; font-size:12px; color:#64748b;">当前视口: 1024px — 3列布局</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-card">
+                            <h4 class="demo-title"><span class="demo-badge purple" data-i18n="demo_label_2">演示 2</span> <span data-i18n="demo_resp_clamp_title">clamp() 弹性字号可视化</span></h4>
+                            <div class="demo-controls"><label data-i18n="demo_viewport_width">视口宽度：</label><input type="range" min="320" max="1600" value="1024" id="clampRange" oninput="updateClamp(this.value)"><span id="clampVal">1024px</span></div>
+                            <div class="demo-area" style="text-align:center; padding:30px;">
+                                <p id="clamp-text" style="font-weight:bold; color:#1e293b; transition: font-size 0.3s; margin:0;">font-size: clamp(1rem, 4vw, 3rem)</p>
+                                <p id="clamp-computed" style="color:#8b5cf6; font-size:14px; margin-top:10px;">计算值: 40.96px</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand"><i class="fas fa-layer-group"></i><span>WebLayout</span><p data-i18n="footer_module_desc">模块六：如何进行网页页面布局</p></div>
+                <div class="footer-links">
+                    <a href="#" onclick="navigateTo('home'); return false;" data-i18n="nav_home">首页</a>
+                    <a href="#" onclick="navigateTo('flexbox'); return false;">Flexbox</a>
+                    <a href="#" onclick="navigateTo('grid'); return false;">Grid</a>
+                    <a href="#" onclick="navigateTo('float'); return false;">Float</a>
+                    <a href="#" onclick="navigateTo('position'); return false;">Position</a>
+                    <a href="#" onclick="navigateTo('responsive'); return false;" data-i18n="nav_responsive">Responsive</a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p data-i18n="footer_copyright">&copy; 2026 WebLayout. 专业网页布局教学系统</p></div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" title="回到顶部" data-i18n-title="btn_back_to_top"><i class="fas fa-arrow-up"></i></button>
+    <script src="js/module6.js"></script>
+</body>
+</html>
